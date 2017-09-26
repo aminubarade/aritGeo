@@ -1,33 +1,39 @@
 "use strict";
 module.exports = {
-	aritGeo:(arr) => {
-		let numLen = arr.length;
-		let diffArit = arr[0] - arr[1];
-        let diffGeo = arr[0] / arr[1];
-        let arithmetic = true;
-        let geometric = true;
-		for(let i=0; i < numLen-1; i++){
-			if(arr[i+1] - arr[i] !== diffArit){
-				let arithmetic= false;
-			}
-			if (arr[i+1] / arr[i] !== diffGeo){
-				let geometric = false;
-			}
-        }
-        if(arithmetic === true){
-            return "arithmetic";
-        }
-        else if(geometric === true){
-            return "geometric";
-        }
-		else if((arr !== arithmetic )&& (arr !==geometric)){
-			return -1;
-		}
-		else if (numLen ===" "){
-			return 0;
-		}
-		else{
-			return "";
+aritGeo:(sequence) =>{
+ 	var term1 = sequence[0];
+	var term2 = sequence[1];
+	var numLen  = sequence.length -1; //number of terms
+	var diff  = term2 - term1; //difference between the first two terms,
+	var arithmetic = true;
+	var geometric = true;
+	var ratio  = term2 / term1; //ratio of the first two terms;
+
+	if (sequence.length === 0) {
+		return 0;
+	 }
+	if (sequence.length <= 2) {
+		return -1;
+	 }
+	for (var i = 0; i < numLen; i++) {
+		if (sequence[i+1] - sequence[i] != diff) {
+			arithmetic = false;
 		}
 	}
+	if (arithmetic) {
+		return 'Arithmetic';
+	}
+	 //check if GP
+	for (var j = 0; j < numLen; j++) {
+		if (sequence[j+1] / sequence[j] != ratio) {
+			geometric = false;
+		}
+	}
+	if (geometric) {
+		return 'Geometric';
+	}
+	if ((sequence !==arithmetic) && (sequence !== geometric)) {
+		return -1;
+	}
+}
 }
